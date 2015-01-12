@@ -1,0 +1,19 @@
+.container {
+	margin: 3em auto;
+	width: 600px;
+}
+
+.hidden {
+	display: none;
+}
+
+.result {
+	border: 1px solid black;
+	padding: 5px;
+	margin: 0 auto 1em auto;
+}
+
+.error {
+	background-color: #F78181;
+	padding: 1em;
+}

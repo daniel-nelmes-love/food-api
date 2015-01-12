@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Template</title>
+	<link rel="stylesheet" href="main.css">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+	<div class="container">
+			<form class="getter" onsubmit="return false;">
+				<input type="text" placeholder='e.g., "example"' name="tags" size="30" autofocus required>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+		<div class="results-container">
+			<div class="search-results"></div>
+			<div class="results"></div>
+		</div>
+	</div>
+	<div class="templates hidden">
+		<dl class="result">
+			<dt>Link</dt>
+				<dd class="link-item"><a href="" target="_blank"></a></dd>
+			<dt>Info</dt>
+				<dd class="info-item"></dd>
+		</dl>
+		<div class="error">
+			<p>Uh-oh! Something went wrong with your request. Here's what we know:</p>
+		</div>
+	</div>
+</body>
+</html>
