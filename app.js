@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$(".query").submit("click", function(event) {
   		event.preventDefault();
 		$(".results").children().remove();
-  		$(".nutritional").children().remove();
+  		$(".nutritional-container").children().remove();
 		userQuery = ($("input[type='text']").val()+",").replace(/, /g, ",");
 		multiTagsArray = $.each(userQuery.split(",").slice(0,-1), function(index, item){});
 		singleTag = multiTagsArray[0];
@@ -76,24 +76,28 @@ function searchTag(singleTag) {
 				};
 			});
 		};
-			
-			function printResults (searchValue) {
-				$(".food-list").append("<li><a class='foodItem' data-id='" + searchValue.ndbno + "' href='#'>" + searchValue.name + "</a></li>");
-			};
 
-			// This function is to mitigate first letter capitalisation for user input tags
-			function checkCaseInArray (tag, value) {
-			tagLower = value.name.indexOf(tag.charAt(0).toLowerCase() + tag.slice(1));
-			tagUpper = value.name.indexOf(tag.charAt(0).toUpperCase() + tag.slice(1));
-			};
+		$(".nutritional-container").append("<div class='instruction'>" +
+												"<p>Click on a food item to display its nutritional information.</p>" +
+											"</div>");
+			
+		function printResults (searchValue) {
+			$(".food-list").append("<li><a class='foodItem' data-id='" + searchValue.ndbno + "' href='#'>" + searchValue.name + "</a></li>");
+		};
+
+		// This function is to mitigate first letter capitalisation for user input tags
+		function checkCaseInArray (tag, value) {
+		tagLower = value.name.indexOf(tag.charAt(0).toLowerCase() + tag.slice(1));
+		tagUpper = value.name.indexOf(tag.charAt(0).toUpperCase() + tag.slice(1));
+		};
 
 		// When a food item is selected a second API search is completed
-		// to retreive its nutritional information using the items data-id
-		$(".foodItem").on("click", function(){
-	  		$(".nutritional").children().remove();
+		// to retreive its nutritional-container information using the items data-id
+		$(".results li").on("click", function(){
+	  		$(".nutritional-container").children().remove();
 			var parameters = {
 				format: 'json',
-				ndbno: $(this).attr("data-id"),
+				ndbno: $(this).find("a").attr("data-id"),
 				api_key: ndbKey
 			};
 			var result = $.ajax({
@@ -104,10 +108,10 @@ function searchTag(singleTag) {
 			.done(function(result){
 				console.log(result.report);
 				var mainInfo = createNutritionInfo(result);
-				$('.nutritional').append(mainInfo);
+				$('.nutritional-container').append(mainInfo);
 
 				// Create a copy of the template nutrition list
-				// and append it under nutritional information
+				// and append it under nutritional-container information
 				function createNutritionInfo(result){
 					// Create a tempprary copy of the template
 					var temp = $(".templates .nutrition").clone();
@@ -131,6 +135,8 @@ function searchTag(singleTag) {
 					DomElement(".protein", lookup.Protein);
 					DomElement(".fat", lookup.Totallipidfat);
 					DomElement(".saturated", lookup.Fattyacidstotalsaturated);
+					DomElement(".saturated", lookup.Fattyacidstotalsaturated);
+					DomElement(".saturated", lookup.Fattyacidstotalsaturated);
 					DomElement(".fiber", lookup.Fibertotaldietary);
 					DomElement(".water", lookup.Water);
 					temp.find(".food").text(path.name);
@@ -146,7 +152,7 @@ function searchTag(singleTag) {
 						+lookup.Water.value).toFixed(1)
 					);
 
-					// Print all nutritional information in the console
+					// Print all nutritional-container information in the console
 					$.each(nutrPath, function(index, nutrValue) {
 						console.log(nutrValue.name + ": " + nutrValue.value + nutrValue.unit);
 					});
