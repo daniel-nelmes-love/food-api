@@ -1,10 +1,11 @@
 $(document).ready(function(){
 	$(".query").submit("click", function(event) {
   		event.preventDefault();
-  		var tag = $("input[type='text']").val();
+  		var userFoodQuery = $("input[type='text']").val();
+		var tag = userQuery.charAt(0).toUpperCase() + userQuery.slice(1);
   		searchTag(tag);
   	});
-  	searchTag("potato");
+//	searchTag("Potato");
 
 });
 
@@ -12,7 +13,7 @@ var searchTag = function(tag) {
 	
 	var parameters = {
 		format: 'json',
-		max: 5,
+		max: 50,
 		q: tag,
 		api_key: "eCxqUNPKtEqBPIQtWQAdv0wBhbDjHnIr2cAd38tF"
 	};
@@ -25,7 +26,10 @@ var searchTag = function(tag) {
 	.done(function(result){
 		$(".results").append("<ul class='food-list'></ul>");
 		$.each(result.list.item, function(index, value){
-			$(".food-list").append("<li><a class='foodItem' data-id='" + value.ndbno + "' href='#'>" + value.name + "</a></li>");
+			if(value.name.indexOf(tag) == 0) {
+				$(".food-list").append("<li><a class='foodItem' data-id='" + value.ndbno + "' href='#'>" + value.name + "</a></li>");
+			};
+			console.log(value)
 		});
 		$(".foodItem").on("click", function(){
 			console.log($(this).attr("data-id"));
