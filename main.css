@@ -5,10 +5,15 @@ ul,li, a {
 	text-decoration: none;
     color: black;
 }
+body {
+	background-color: #B0E2FF;
+	font-family: 'Ubuntu', sans-serif;
+}
 
 .container {
 	margin: 3em auto;
 	width: 60rem;
+	height: 40rem;
 	position: relative;
 }
 
@@ -16,38 +21,72 @@ ul,li, a {
 	display: none;
 }
 
-.results,
-.nutritional {
+input,
+.results-container,
+.nutritional-container{
+	background-color: #BFEFFF;
+	border: 0.4rem solid white;  
+    box-shadow: inset 0 0 8px #B0E2FF;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+input {
+	font-size: 1.2rem;
+	font-family: 'Montserrat', sans-serif;
+}
+
+input[type=text] {
+	width: 22.8rem;
+}
+
+input[type=submit] {
+	width: 7rem;
+}
+
+.query {
+	position: absolute;
+	left: -2.5rem;
+}
+
+.nutritional-container .instruction {
+	padding: 14rem 2rem;
+}
+
+.results-container,
+.nutritional-container {
 	height: 32rem;
 	width: 30rem;
 	position: absolute;
-	background-color: teal;
+	top: 5rem;
 }
 
-.results{
-	left: -3px;
+.results-container{
+	left: -2.5rem;
 	overflow: scroll;
-	border: 1px solid black;
-	border-top: none;
 }
 
-.results li {
+.results-container ul {
+	border-bottom: 1px solid black;
+}
+
+.results-container li {
 	border-top: 1px solid black;
 	padding: 0.5rem 1rem;
+	cursor: pointer;
 }
 
-.nutritional {
-	right: 0;
+.nutritional-container {
+	right: -2.5rem;
 	z-index: -1;
-	border: 1px solid black;
 }
 
-.nutritional li {
+.nutritional-container li {
 	border-top: 1px dashed black;
 	padding: 0.5rem 0rem;
 }
 
-.nutritional ul {
+.nutritional-container ul {
 	border-bottom: 1px dashed black;
 }
 
@@ -80,3 +119,8 @@ ul,li, a {
 	padding-left: 1.5rem;
 }
 
+.attribution {
+	width: 30rem;
+	margin: 0 auto;
+	text-align: center;
+}
