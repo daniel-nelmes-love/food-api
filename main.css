@@ -13,7 +13,7 @@ body {
 .container {
 	margin: 3em auto;
 	width: 60rem;
-	height: 40rem;
+	height: 38rem;
 	position: relative;
 }
 
@@ -28,7 +28,6 @@ input,
 	border: 0.4rem solid white;  
     box-shadow: inset 0 0 8px #B0E2FF;
     padding: 1rem;
-    margin-bottom: 0.5rem;
 }
 
 input {
@@ -55,7 +54,7 @@ input[type=submit] {
 
 .results-container,
 .nutritional-container {
-	height: 32rem;
+	height: 30rem;
 	width: 30rem;
 	position: absolute;
 	top: 5rem;
