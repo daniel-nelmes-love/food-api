@@ -5,18 +5,61 @@
 	<title>Template</title>
 	<link rel="stylesheet" href="main.css">
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu|Montserrat' rel='stylesheet' type='text/css'>
 	<script src="app.js"></script>
 </head>
 <body>
 	<div class="container">
 		<form class="query" onsubmit="return false;">
-			<input type="text" placeholder='e.g., "example"' name="tags" size="30" autofocus required>
+			<input type="text" placeholder='e.g. "potato, raw"' name="tags" autofocus required>
 			<input type="submit" value="Submit">
 		</form>
 		<div class="results-container">
 			<div class="search-results"></div>
-			<div class="results"></div>
+			<div class="results">
+				<div class="instruction">
+					<p>Look for a food by putting a food name in the search bar above.</p>
+					<p>You can refine your search by putting extra information separating your search items with a space</p>
+					<p>E.g. "fried egg" would only provide results for a fried egg</p>
+				</div>
+			</div>
 		</div>
+		<div class="nutritional-container"></div>
+	</div>
+	<div class="hidden templates">
+		<div class="nutrition list">
+			<h2 class="food"></h2>
+			<div class="title column">
+				<h3>nutritional-container</br>Information</h3>
+				<ul>
+					<li>Calories</li>
+					<li>Protien</li>
+					<li>Total fat</li>
+					<li id="satfat">Saturated</li>
+					<li>Net carbs</li>
+					<li>Fiber</li>
+					<li>Water</li>
+				</ul>
+			</div>
+			<div class="info column">
+				<h3>Approximate</br>per 100g</h3>
+				<ul>
+					<li class="calories"></li>
+					<li class="protein"></li>
+					<li class="fat"></li>
+					<li class="saturated"></li>
+					<li class="carbohydrate"></li>
+					<li class="fiber"></li>
+					<li class="water"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="error">
+			<p>Your search returned no results - please try a different search.</p>
+		</div>
+	</div>
+	<div class="attribution">
+		<a href="http://ndb.nal.usda.gov/ndb/api/doc">Search results and nutritional information sourced from</br>The National Nutrient Database for Standard Reference Release 27</a>
 	</div>
 </body>
 </html>

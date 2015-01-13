@@ -1,19 +1,125 @@
+ul,li, a {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	text-decoration: none;
+    color: black;
+}
+body {
+	background-color: #B0E2FF;
+	font-family: 'Ubuntu', sans-serif;
+}
+
 .container {
 	margin: 3em auto;
-	width: 600px;
+	width: 60rem;
+	height: 38rem;
+	position: relative;
 }
 
 .hidden {
 	display: none;
 }
 
-.result {
-	border: 1px solid black;
-	padding: 5px;
-	margin: 0 auto 1em auto;
+input,
+.results-container,
+.nutritional-container{
+	background-color: #BFEFFF;
+	border: 0.4rem solid white;  
+    box-shadow: inset 0 0 8px #B0E2FF;
+    padding: 1rem;
 }
 
-.error {
-	background-color: #F78181;
-	padding: 1em;
+input {
+	font-size: 1.2rem;
+	font-family: 'Montserrat', sans-serif;
+}
+
+input[type=text] {
+	width: 22.8rem;
+}
+
+input[type=submit] {
+	width: 7rem;
+}
+
+.query {
+	position: absolute;
+	left: -2.5rem;
+}
+
+.nutritional-container .instruction {
+	padding: 14rem 2rem;
+}
+
+.results-container,
+.nutritional-container {
+	height: 30rem;
+	width: 30rem;
+	position: absolute;
+	top: 5rem;
+}
+
+.results-container{
+	left: -2.5rem;
+	overflow: scroll;
+}
+
+.results-container ul {
+	border-bottom: 1px solid black;
+}
+
+.results-container li {
+	border-top: 1px solid black;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+}
+
+.nutritional-container {
+	right: -2.5rem;
+	z-index: -1;
+}
+
+.nutritional-container li {
+	border-top: 1px dashed black;
+	padding: 0.5rem 0rem;
+}
+
+.nutritional-container ul {
+	border-bottom: 1px dashed black;
+}
+
+.nutrition {
+	padding: 0 2rem;
+	overflow: hidden;
+}
+
+.food {
+	text-align: center;
+}
+
+.title,
+.info {
+	width: 12.9rem;
+}
+
+
+.title {
+	text-align: left;
+	float: left;
+}
+
+.info {
+	text-align: right;
+	float: right;
+}
+
+#satfat {
+	padding-left: 1.5rem;
+}
+
+.attribution {
+	width: 30rem;
+	margin: 0 auto;
+	text-align: center;
 }
