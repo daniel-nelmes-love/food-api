@@ -7,47 +7,69 @@ $(document).ready(function(){
   		userQuery = ($("input[type='text']").val()+",").replace(/, /g, ",");
 		multiTagsArray = $.each(userQuery.split(",").slice(0,-1), function(index, item){});
 		singleTag = multiTagsArray[0];
-
 		searchTag(singleTag);
   	});
-//	searchTag("potato");
+
+  	$(".foodItem").on("click", function(){
+		var foodID = $(this).attr("data-id");
+		findFoodNutirent(foodID);
+	});
 });
+
+function findFoodNutirent(foodID) {
+	var parameters = {
+		format: 'json',
+		ndbno: foodID,
+		api_key: ndbKey
+	};
+	var result = $.ajax({
+		url: "https://api.data.gov/usda/ndb/reports/",
+		data: parameters,
+		type: "GET"
+	})
+	.done(function(result){
+		console.log(result.report);
+	});
+};
 
 // Global Variables
 var userQuery,
 	multiTagsArray,
 	singleTag,
-	tagLower,
-	tagUpper,
-	checkRelavance;
+	ndbKey = "eCxqUNPKtEqBPIQtWQAdv0wBhbDjHnIr2cAd38tF";
 
 function searchTag(singleTag) {
 	
 	var parameters = {
 		format: 'json',
 		q: singleTag,
-		api_key: "eCxqUNPKtEqBPIQtWQAdv0wBhbDjHnIr2cAd38tF"
+		api_key: ndbKey
 	};
 	
 	var result = $.ajax({
 		url: "https://api.data.gov/usda/ndb/search/",
 		data: parameters,
-		type: "GET",
+		type: "GET"
 		})
 	.done(function(result){
-		var searchResults = result.list.item;
+		var tagLower,
+			tagUpper,
+			checkRelavance,
+			searchResults = result.list.item;
+
 		$(".results").append("<ul class='food-list'></ul>");
+
 		if (multiTagsArray.length === 1) {
 			$.each(searchResults, function(index, searchValue) {
 				checkCaseInArray(singleTag, searchValue);
 				if(tagLower == 0 || tagUpper == 0) {
-					$(".food-list").append("<li><a class='foodItem' data-id='" + searchValue.ndbno + "' href='#'>" + searchValue.name + "</a></li>");
+					printResults(searchValue);
 				};
 			});
+
 		} else {
 			$.each(searchResults, function(index, searchValue) {
 				checkRelavance = 0;
-
 				var resultNamesArray =
 					$.each((searchValue.name +",")
 					.replace(/, /g, ",")
@@ -62,19 +84,19 @@ function searchTag(singleTag) {
 					};
 				});
 				if (checkRelavance===multiTagsArray.length) {
-					$(".food-list").append("<li><a class='foodItem' data-id='" + searchValue.ndbno + "' href='#'>" + searchValue.name + "</a></li>");
+					printResults(searchValue);
 				};
 			});
 		};
-		
+			
+			function printResults (searchValue) {
+				$(".food-list").append("<li><a class='foodItem' data-id='" + searchValue.ndbno + "' href='#'>" + searchValue.name + "</a></li>");
+			};
+
 			function checkCaseInArray (tag, value) {
 			tagLower = value.name.indexOf(tag.charAt(0).toLowerCase() + tag.slice(1));
 			tagUpper = value.name.indexOf(tag.charAt(0).toUpperCase() + tag.slice(1));
 			};
-
-		$(".foodItem").on("click", function(){
-			console.log($(this).attr("data-id"));
-		});
 
 	});
 

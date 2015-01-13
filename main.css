@@ -7,13 +7,18 @@
 	display: none;
 }
 
-.result {
+.results{
 	border: 1px solid black;
 	padding: 5px;
 	margin: 0 auto 1em auto;
+	float: left;
 }
 
-.error {
-	background-color: #F78181;
-	padding: 1em;
+.nutritional {
+	float: right;
+	width: 20rem;
+	height: 30rem;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
 }
