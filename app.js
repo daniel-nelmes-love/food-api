@@ -30,7 +30,7 @@ function searchTag(singleTag) {
 	};
 	
 	var result = $.ajax({
-		url: "http://api.data.gov/usda/ndb/search/",
+		url: "https://api.data.gov/usda/ndb/search/",
 		data: parameters,
 		type: "GET",
 		})
