@@ -1,6 +1,6 @@
 .container {
 	margin: 3em auto;
-	width: 600px;
+	width: 800px;
 }
 
 .hidden {
@@ -9,16 +9,12 @@
 
 .results{
 	border: 1px solid black;
-	padding: 5px;
-	margin: 0 auto 1em auto;
 	float: left;
+	width: 450px;
 }
 
 .nutritional {
 	float: right;
-	width: 20rem;
-	height: 30rem;
-	border-width: 1px;
-	border-color: black;
-	border-style: solid;
+	width: 300px;
+	border: 1px solid black;
 }
