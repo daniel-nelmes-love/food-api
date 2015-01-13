@@ -1,20 +1,82 @@
+ul,li, a {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	text-decoration: none;
+    color: black;
+}
+
 .container {
 	margin: 3em auto;
-	width: 800px;
+	width: 60rem;
+	position: relative;
 }
 
 .hidden {
 	display: none;
 }
 
+.results,
+.nutritional {
+	height: 32rem;
+	width: 30rem;
+	position: absolute;
+	background-color: teal;
+}
+
 .results{
+	left: -3px;
+	overflow: scroll;
 	border: 1px solid black;
-	float: left;
-	width: 450px;
+	border-top: none;
+}
+
+.results li {
+	border-top: 1px solid black;
+	padding: 0.5rem 1rem;
 }
 
 .nutritional {
-	float: right;
-	width: 300px;
+	right: 0;
+	z-index: -1;
 	border: 1px solid black;
 }
+
+.nutritional li {
+	border-top: 1px dashed black;
+	padding: 0.5rem 0rem;
+}
+
+.nutritional ul {
+	border-bottom: 1px dashed black;
+}
+
+.nutrition {
+	padding: 0 2rem;
+	overflow: hidden;
+}
+
+.food {
+	text-align: center;
+}
+
+.title,
+.info {
+	width: 12.9rem;
+}
+
+
+.title {
+	text-align: left;
+	float: left;
+}
+
+.info {
+	text-align: right;
+	float: right;
+}
+
+#satfat {
+	padding-left: 1.5rem;
+}
+
