@@ -70,6 +70,7 @@ function printSearchResults(domToBeSetUp, relevantResults, searchResults, single
 		checkCaseInArray(singleTag, searchValue);
 		if(tagLower == 0 || tagUpper == 0) {
 			checkForFoodList(domToBeSetUp);
+			domToBeSetUp = false;
 			printResult(searchValue);
 			relevantResults++;
 		};
@@ -96,10 +97,8 @@ function refineSearchResults(domToBeSetUp, relevantResults, searchResults, multi
 		// If the result is relevant based on all user input tags then it gets printed
 		if (thisResultRelevance===multiTagsArray.length) {
 			// Set up the DOM when first relevant result is found
-			if (domToBeSetUp) {
-				setUpDomToPrint();
-				domToBeSetUp = false;
-			};
+			checkForFoodList(domToBeSetUp);
+			domToBeSetUp = false;
 			printResult(searchValue);
 			relevantResults++;
 		};
@@ -111,7 +110,6 @@ function refineSearchResults(domToBeSetUp, relevantResults, searchResults, multi
 function checkForFoodList(domToBeSetUp) {
 	if (domToBeSetUp) {
 		setUpDomToPrint();
-		domToBeSetUp = false;
 	};
 }
 
