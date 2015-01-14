@@ -37,7 +37,7 @@ function searchApiWith(userQuery) {
 		// When a food item is selected a second API search is completed
 		// to retreive its nutritional-container information using the items foodId
 		$(".results li").on("click", function(){
-			var foodId = $(this).find("a").attr("data-id");
+			var foodId = $(this).attr("data-id");
 			getNutritionalInformation(foodId);
 		});
 
@@ -194,7 +194,7 @@ function checkCaseInArray (tag, value) {
 
 // Print food items found in first search along with their ndbno (data-id)
 function printResult (searchValue) {
-	$(".food-list").append("<li><a class='foodItem' data-id='" + searchValue.ndbno + "' href='#'>" + searchValue.name + "</a></li>");
+	$(".food-list").append("<li class='foodItem' data-id='" + searchValue.ndbno + "'>" + searchValue.name + "</li>");
 };
 
 // Place the nutritional value and unit inside the temporary element for the DOM
