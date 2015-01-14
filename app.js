@@ -3,7 +3,7 @@ $(document).ready(function(){
   		event.preventDefault();
 		$(".results").children().remove();
   		$(".nutritional-container").children().remove();
-		var userQuery = ($("input[type='text']").val()).replace(/[\s-+(),.]/g, " ");
+		var userQuery = ($("input[name='tags']").val()).replace(/[\s-+(),.]/g, " ");
 		searchApiWith(userQuery);
   	});
 });
@@ -32,7 +32,7 @@ function searchApiWith(userQuery) {
 
 //			console.log(result);
 
-		printSearchResult(searchResults, multiTagsArray)
+		reviewSearchResults(searchResults, multiTagsArray)
 
 		// When a food item is selected a second API search is completed
 		// to retreive its nutritional-container information using the items foodId
@@ -54,27 +54,32 @@ function searchApiWith(userQuery) {
 // E.g. A search for "potato" would not print "Snacks, potato chips..."
 // Else produce results that are refined based on all user input tags
 // E.g. A search for "raw potato" would print all results with "raw" and "potato" as part of its name
-function printSearchResult(searchResults, multiTagsArray) {
-	var singleTag = multiTagsArray[0];
+function reviewSearchResults(searchResults, multiTagsArray) {
+	var domToBeSetUp = true,
+		relevantResults = 0;
 	if (multiTagsArray.length === 1) {
-		setUpDomToPrint();
-		$.each(searchResults, function(index, searchValue) {
-			checkCaseInArray(singleTag, searchValue);
-			if(tagLower == 0 || tagUpper == 0) {
-				printResult(searchValue);
-			};
-		});
+		var singleTag = multiTagsArray[0];
+		printSearchResults(domToBeSetUp, relevantResults, searchResults, singleTag);
 	} else {
-		refineSearchResults(searchResults, multiTagsArray);
+		refineSearchResults(domToBeSetUp, relevantResults, searchResults, multiTagsArray);
 	};
 }
 
-function refineSearchResults(searchResults, multiTagsArray) {
-	var domToBeSetUp = true,
-		relevantResults = 0;
-
+function printSearchResults(domToBeSetUp, relevantResults, searchResults, singleTag) {
 	$.each(searchResults, function(index, searchValue) {
-		var checkResultRelavance = 0,
+		checkCaseInArray(singleTag, searchValue);
+		if(tagLower == 0 || tagUpper == 0) {
+			checkForFoodList(domToBeSetUp);
+			printResult(searchValue);
+			relevantResults++;
+		};
+	});
+	checkRelevantResults(relevantResults);
+}
+
+function refineSearchResults(domToBeSetUp, relevantResults, searchResults, multiTagsArray) {
+	$.each(searchResults, function(index, searchValue) {
+		var thisResultRelevance = 0,
 			resultNamesArray =
 				$.each((searchValue.name)
 				.replace(/,/g, "")
@@ -84,12 +89,12 @@ function refineSearchResults(searchResults, multiTagsArray) {
 		$.each(multiTagsArray, function(index, tagValue) {
 			checkCaseInArray(tagValue, searchValue);
 			if(tagLower >= 0 || tagUpper >= 0) {
-				checkResultRelavance ++;
+				thisResultRelevance ++;
 			};
 		});
 
 		// If the result is relevant based on all user input tags then it gets printed
-		if (checkResultRelavance===multiTagsArray.length) {
+		if (thisResultRelevance===multiTagsArray.length) {
 			// Set up the DOM when first relevant result is found
 			if (domToBeSetUp) {
 				setUpDomToPrint();
@@ -99,12 +104,23 @@ function refineSearchResults(searchResults, multiTagsArray) {
 			relevantResults++;
 		};
 	});
+	checkRelevantResults(relevantResults);
+};
 
-	// If no relevant results were found present error
+// Check if the DOM is ready to be populated with foor items
+function checkForFoodList(domToBeSetUp) {
+	if (domToBeSetUp) {
+		setUpDomToPrint();
+		domToBeSetUp = false;
+	};
+}
+
+// If no relevant results were found present error
+function checkRelevantResults(relevantResults) {
 	if (relevantResults===0) {
 		showError();
 	};
-};
+}
 
 function getNutritionalInformation (foodId) {
 	$(".nutritional-container").children().remove();

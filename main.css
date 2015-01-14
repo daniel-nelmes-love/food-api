@@ -22,17 +22,20 @@ body {
 }
 
 input,
+header,
 .results-container,
-.nutritional-container{
+.nutritional-container {
 	background-color: #BFEFFF;
 	border: 0.4rem solid white;  
     box-shadow: inset 0 0 8px #B0E2FF;
     padding: 1rem;
 }
 
-input {
+input,
+header {
 	font-size: 1.2rem;
 	font-family: 'Montserrat', sans-serif;
+	text-align: center;
 }
 
 input[type=text] {
@@ -40,23 +43,35 @@ input[type=text] {
 }
 
 input[type=submit] {
-	width: 7rem;
+	width: 6.6rem;
+	padding: 1rem 0;
+}
+
+.query,
+header,
+.results-container,
+.nutritional-container {
+	position: absolute;
 }
 
 .query {
-	position: absolute;
 	left: -2.5rem;
 }
 
+header {
+	right: -2.5rem;
+	width: 29.6rem;
+	text-align: center;
+}
+
 .nutritional-container .instruction {
-	padding: 14rem 2rem;
+	padding: 13rem 2rem;
 }
 
 .results-container,
 .nutritional-container {
 	height: 30rem;
 	width: 30rem;
-	position: absolute;
 	top: 5rem;
 }
 
